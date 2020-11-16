@@ -25,22 +25,25 @@ public class MoneyTest {
 
 	@Test
 	public void testGetAmount() {
-		fail("Write test case here");
+
+		assertEquals(10000,(int)SEK100.getAmount());
 	}
 
 	@Test
 	public void testGetCurrency() {
-		fail("Write test case here");
+
+		assertEquals(SEK,SEK100.getCurrency());
 	}
 
 	@Test
 	public void testToString() {
-		fail("Write test case here");
+		String msg ="100.00 SEK";
+		assertEquals(msg,SEK100.toString());
 	}
 
 	@Test
 	public void testGlobalValue() {
-		fail("Write test case here");
+		assertEquals(3000,(int)SEK200.universalValue());
 	}
 
 	@Test

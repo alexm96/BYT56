@@ -35,12 +35,12 @@ public class CurrencyTest {
 	
 	@Test
 	public void testGlobalValue() {
-		assertEquals(1500,(int) SEK.universalValue(100));
+		assertEquals(15,(int) SEK.universalValue(100));
 	}
 	
 	@Test
 	public void testValueInThisCurrency() {
-		assertEquals(100000,(int)SEK.valueInThisCurrency(100,EUR));
+		assertEquals(1000,(int)SEK.valueInThisCurrency(100,EUR));
 	}
 
 }
