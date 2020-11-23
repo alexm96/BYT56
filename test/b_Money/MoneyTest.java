@@ -48,31 +48,42 @@ public class MoneyTest {
 
 	@Test
 	public void testEqualsMoney() {
-		fail("Write test case here");
+		assertTrue(SEK200.equals(SEK200));
+		assertTrue(SEK100.equals(EUR10));
 	}
 
 	@Test
 	public void testAdd() {
-		fail("Write test case here");
+
+		Money shouldBe3000 = SEK100.add(EUR10);
+		assertEquals(3000,(int) shouldBe3000.universalValue());
 	}
 
 	@Test
 	public void testSub() {
-		fail("Write test case here");
+		Money shouldBe0 = SEK100.sub(EUR10);
+		assertEquals(0,(int) shouldBe0.universalValue());
 	}
 
 	@Test
 	public void testIsZero() {
-		fail("Write test case here");
+		Money shouldBe0 = SEK100.sub(EUR10);
+		assertTrue(shouldBe0.isZero());
 	}
 
 	@Test
 	public void testNegate() {
-		fail("Write test case here");
+		Money shouldBe3000 = SEK100.add(EUR10);
+		Money shouldBeNeg3000=shouldBe3000.negate();
+		assertEquals(-3000,(int)shouldBeNeg3000.universalValue());
+
 	}
 
 	@Test
 	public void testCompareTo() {
-		fail("Write test case here");
+		assertEquals(0,SEK200.compareTo(SEK200));
+		assertEquals(1,SEK200.compareTo(SEK100));
+		assertEquals(-1,SEK100.compareTo(SEK200));
+		assertEquals(0,SEK100.compareTo(EUR10));
 	}
 }
