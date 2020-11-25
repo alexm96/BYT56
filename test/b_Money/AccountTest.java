@@ -18,27 +18,36 @@ public class AccountTest {
 		SweBank.openAccount("Alice");
 		testAccount = new Account("Hans", SEK);
 		testAccount.deposit(new Money(10000000, SEK));
-
 		SweBank.deposit("Alice", new Money(1000000, SEK));
 	}
 	
 	@Test
 	public void testAddRemoveTimedPayment() {
-		fail("Write test case here");
+		testAccount.addTimedPayment("TestPayment",1,1,new Money(1000,SEK),SweBank,"Alice");
+		assertTrue(testAccount.timedPaymentExists("TestPayment"));
+		testAccount.removeTimedPayment("TestPayment");
+		assertFalse(testAccount.timedPaymentExists("TestPayment"));
 	}
 	
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		assertEquals(10000000,(int) testAccount.getBalance().getAmount());
+		testAccount.addTimedPayment("TestPayment",1,1,new Money(1000000,SEK),SweBank,"Alice");
+		testAccount.tick();
+		testAccount.tick();
+		assertEquals(9000000,(int) testAccount.getBalance().getAmount());
+		assertEquals(2000000,(int) SweBank.getBalance("Alice"));
 	}
 
 	@Test
 	public void testAddWithdraw() {
-		fail("Write test case here");
+		assertEquals(10000000,(int) testAccount.getBalance().getAmount());
+		testAccount.withdraw(new Money(10000,SEK));
+		assertNotEquals(10000000,(int) testAccount.getBalance().getAmount());
 	}
 	
 	@Test
 	public void testGetBalance() {
-		fail("Write test case here");
+		assertEquals(10000000,(int) testAccount.getBalance().getAmount());
 	}
 }

@@ -75,8 +75,7 @@ public class MoneyTest {
 	public void testNegate() {
 		Money shouldBe3000 = SEK100.add(EUR10);
 		Money shouldBeNeg3000=shouldBe3000.negate();
-		assertEquals(-3000,(int)shouldBeNeg3000.universalValue());
-
+		assertEquals(-3000, (int)shouldBeNeg3000.universalValue());
 	}
 
 	@Test
