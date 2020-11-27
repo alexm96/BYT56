@@ -34,7 +34,7 @@ public class AccountTest {
 		assertEquals(10000000,(int) testAccount.getBalance().getAmount());
 		testAccount.addTimedPayment("TestPayment",1,1,new Money(1000000,SEK),SweBank,"Alice");
 		testAccount.tick();
-		testAccount.tick();
+
 		assertEquals(9000000,(int) testAccount.getBalance().getAmount());
 		assertEquals(2000000,(int) SweBank.getBalance("Alice"));
 	}

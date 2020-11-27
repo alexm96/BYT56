@@ -24,41 +24,65 @@ public class BankTest {
 
 	@Test
 	public void testGetName() {
-		fail("Write test case here");
+		assertEquals("SweBank", SweBank.getName());
+		assertEquals("Nordea", Nordea.getName());
+		assertEquals("DanskeBank", DanskeBank.getName());
 	}
 
 	@Test
 	public void testGetCurrency() {
-		fail("Write test case here");
+		assertEquals("SEK", SweBank.getCurrency().getName());
+		assertEquals("DKK", DanskeBank.getCurrency().getName());
+		assertEquals("SEK", Nordea.getCurrency().getName());
 	}
 
 	@Test
 	public void testOpenAccount() throws AccountExistsException, AccountDoesNotExistException {
-		fail("Write test case here");
+
+		SweBank.openAccount("toOpen");
+		assertEquals(0 ,(int)SweBank.getBalance("toOpen"));
 	}
 
 	@Test
 	public void testDeposit() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		SweBank.deposit("Bob", new Money(100000, SEK));
+		assertEquals(100000, (int)SweBank.getBalance("Bob"));
 	}
 
 	@Test
 	public void testWithdraw() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		SweBank.deposit("Bob", new Money(100000, SEK));
+		SweBank.withdraw("Bob", new Money(100000, SEK));
+		assertEquals(0,(int) SweBank.getBalance("Bob"));
 	}
-	
+
 	@Test
 	public void testGetBalance() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		SweBank.deposit("Bob", new Money(1000, SEK));
+		assertEquals(1000, (int)SweBank.getBalance("Bob"));
 	}
-	
+
+
 	@Test
 	public void testTransfer() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		SweBank.deposit("Bob", new Money(1000, SEK));
+		SweBank.transfer("Bob", "Ulrika",new Money(1000, SEK));
+		assertEquals(0, (int)SweBank.getBalance("Bob"));
+		assertEquals(1000, (int)SweBank.getBalance("Ulrika"));
 	}
-	
+
 	@Test
 	public void testTimedPayment() throws AccountDoesNotExistException {
-		fail("Write test case here");
+		SweBank.deposit("Bob", new Money(1000, SEK));
+		SweBank.addTimedPayment("Bob", "sample", 1, 1, new Money(100, SEK),Nordea, "Bob");
+		SweBank.tick();
+
+		assertEquals(900, (int)SweBank.getBalance("Bob"));
+		assertEquals(100, (int)Nordea.getBalance("Bob"));
+		SweBank.removeTimedPayment("Bob", "sample");
+		SweBank.tick();
+
+		assertEquals(Integer.valueOf(900), SweBank.getBalance("Bob"));
+		assertEquals(Integer.valueOf(100), Nordea.getBalance("Bob"));
 	}
 }
